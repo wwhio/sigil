@@ -26,11 +26,25 @@
   </section>
 
   <div id="container" class="super-list variable-sizes clearfix">  
+    <!-- <div class="link" style="height:155px;" data-number="5"><a href="">某种子站点[GWF]</a><input style="width:225px;" value='http://www.baidu.com'/></div>
+    <div class="link" style="height:155px;" data-number="6"><a href="">My Weibo ：&#8203;HELL_DOOR</a></div>
+    <div class="link" style="height:155px;" data-number="7"><a href="">My Weibo ：&#8203;HELL_DOOR</a></div> -->
     <?php
       foreach ($main as $key => $value) {
     ?>
       <div class="element metal <?php echo $value->coverWidth; ?> " style="height:<?php echo $value->coverHeight; ?>px;" data-number="<?php echo $value->dataNumber; ?>">
-        <img class="comic <?php echo $value->coverWidth; ?>" src="<?php echo $value->coverPath; ?>"/>
+        <a href="">
+          <img class="comic <?php echo $value->coverWidth; ?>" src="<?php echo $value->coverPath; ?>"/>
+
+        </a>
+        <div class="bg <?php echo $value->coverWidth; ?>">
+            <?php
+              if ($value->coverWidth == 'width')
+                echo 'C^3魔方少女';
+              else 
+                echo '热带雨林的爆笑生活';
+            ?>
+        </div>
       </div>
     <?php
       }

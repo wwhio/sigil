@@ -94,6 +94,25 @@ class Tools {
 	}
 
 	/**
+	* 按一定规则计算出宽度
+	* return obj
+	*/
+	public function getRandWidthByNumber($number){
+		$array = array('width' => 100 ,'width2' => 220);
+		$class = array_rand($array , 1);
+		$result = new stdClass;
+		
+		if ($number % 2 == 0){
+			$result->class = 'width';  
+			$result->width = 100;
+		} else {
+			$result->class = 'width2';  
+			$result->width = 220;
+		}
+		return $result;
+	}
+
+	/**
 	* 在a字符串中插入指定的b字符串
 	* @str 原始字符串
 	* @ist_str 需要的插入的字符串

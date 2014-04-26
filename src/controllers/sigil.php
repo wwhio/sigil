@@ -15,12 +15,15 @@ class Sigil extends CI_Controller {
 		$root = $_SERVER['DOCUMENT_ROOT'].'/sigil/';
 
 		//随机50本漫画
-		$comicArray = $comic_model->selectComic($tools->mkRandomNumber(1,$comic_model->countMaxComicId(),50));
+		$comicArray = $comic_model->selectComic($tools->mkRandomNumber(1,$comic_model->countMaxComicId(),20));
 		//循环补全数据
 		$mainData = array();
+		$testNumber = 0;
 		foreach ($comicArray as $key => $value) {
 			$comic = new stdClass;
+			$testNumber++;
 			$randWidth = $tools->getRandWidth();
+
 			//漫画名称
 			$comic->name = $value->comic_name;
 			//漫画id
@@ -34,7 +37,10 @@ class Sigil extends CI_Controller {
 				$path = $value->chapter_cover;
 				$comic->coverPath = $tools->str_insert($path , '_'.$randWidth->class , strrpos($path , '.'));;
 				//封面高度[＋10补正]
-				$comic->coverHeight = $tools->getImgHeight($coverPath)+10;
+				if ($randWidth->class == 'width')
+					$comic->coverHeight = 155;
+				else
+					$comic->coverHeight = 320;
 				//随机的宽度类型
 				$comic->coverWidth = $randWidth->class;
 			} else {
@@ -49,15 +55,15 @@ class Sigil extends CI_Controller {
 
 			//排列编号
 			switch ($key) {
-				case 5:
-					$comic->dataNumber = sizeof($comicArray);
-					break;
-				case 13:
-					$comic->dataNumber = sizeof($comicArray)+1;
-					break;
-				case 35:
-					$comic->dataNumber = sizeof($comicArray)+2;
-					break;
+				// case 5:
+				// 	$comic->dataNumber = sizeof($comicArray);
+				// 	break;
+				// case 13:
+				// 	$comic->dataNumber = sizeof($comicArray)+1;
+				// 	break;
+				// case 35:
+				// 	$comic->dataNumber = sizeof($comicArray)+2;
+				// 	break;
 				default:
 					$comic->dataNumber = $key;
 					break;
